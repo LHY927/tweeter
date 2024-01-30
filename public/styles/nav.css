@@ -11,7 +11,7 @@ nav{
     position:fixed;
 }
 
-div{
+nav div{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,10 +20,6 @@ div{
 
 .title{
     font-family: 'Bungee', sans-serif;
-}
-
-i{
-    color: #ff2600;
 }
 
 
