@@ -47,12 +47,13 @@ main {
   }
 
   .page-header{
-    margin: 100px;
+    margin: 50px;
     margin-top: 220px;
   }
 
   .container{
     min-width: 50%;
+    margin: 50px;
     margin-top: 140px;
   }
 }

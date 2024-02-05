@@ -40,6 +40,7 @@ article header{
     width: 90%;
     border-bottom: solid #545149;
     text-wrap: pretty;
+    word-break: break-all;
 }
 
 article footer{

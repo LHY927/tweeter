@@ -12,6 +12,13 @@ This repository is the starter code for the project: Students will fork and clon
 3. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
 4. Go to <http://localhost:8080/> in your browser.
 
+## Responsive Design
+
+### Desktop
+!["UI for Desktop"](https://github.com/LHY927/tweeter/blob/master/docs/DesktopView.jpg)
+### Template
+!["UI for Template"](https://github.com/LHY927/tweeter/blob/master/docs/TemplateView.jpg)
+
 ## Dependencies
 
 - Express
