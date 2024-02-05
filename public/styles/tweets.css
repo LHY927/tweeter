@@ -39,6 +39,7 @@ article header{
 .tweet-text{
     width: 90%;
     border-bottom: solid #545149;
+    text-wrap: pretty;
 }
 
 article footer{

@@ -31,3 +31,28 @@ main {
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+ @media only screen and (max-width: 1024px) {
+  /* Write CSS rules that target Tablets screen sizes upwards - including desktops */
+  nav{
+    background-color: transparent;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  /* Write CSS rules that target Laptop/Desktop screen sizes and beyond */
+  body{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .page-header{
+    margin: 100px;
+    margin-top: 220px;
+  }
+
+  .container{
+    min-width: 50%;
+    margin-top: 140px;
+  }
+}

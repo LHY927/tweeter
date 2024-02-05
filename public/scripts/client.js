@@ -3,33 +3,7 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-
-// Test / driver code (temporary). Eventually will get this from the server.
-// Fake data taken from initial-tweets.json
-const data = [
-  {
-    user: {
-      name: "Newton",
-      avatars: "https://i.imgur.com/73hZDYK.png",
-      handle: "@SirIsaac",
-    },
-    content: {
-      text: "If I have seen further it is by standing on the shoulders of giants",
-    },
-    created_at: 1461116232227,
-  },
-  {
-    user: {
-      name: "Descartes",
-      avatars: "https://i.imgur.com/nlhLi3I.png",
-      handle: "@rd",
-    },
-    content: {
-      text: "Je pense , donc je suis",
-    },
-    created_at: 1461113959088,
-  },
-];
+const url = "http://localhost:8080/tweets";
 
 const createTweetElement = function (tweet) {
   let $tweet = `
@@ -44,11 +18,11 @@ const createTweetElement = function (tweet) {
         </div>
         </header>
         <div class="tweet-text">
-        <p>${tweet.content.text}</p>
+        <p>${escape(tweet.content.text)}</p>
         </div>
         <footer>
         <div>
-            <span>${timeDiff(tweet.created_at)}</span>
+            <span>${$.timeago(tweet.created_at)}</span>
         </div>
         <div class="footer-icons">
             <i class="fa-solid fa-flag"></i>
@@ -58,6 +32,12 @@ const createTweetElement = function (tweet) {
         </footer>
     </article>`;
   return $tweet;
+};
+
+const escape = function (str) {
+  let div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
 };
 
 const renderTweets = function (tweets) {
@@ -70,11 +50,46 @@ const renderTweets = function (tweets) {
   }
 };
 
+const loadTweets = function (url) {
+  $.ajax(url, { method: "GET" }).then(function (data) {
+    renderTweets(data);
+    //console.log(data);
+  });
+};
+
+const showErrorMessage = function (msg) {
+  $(".error-message").append(`<i class="fa-solid fa-triangle-exclamation"></i>
+    <span>${msg}</span>
+    <i class="fa-solid fa-triangle-exclamation"></i>`);
+  $(document).ready(function () {
+    $(".error-message").slideDown("slow", function () {
+      console.log("works");
+    });
+  });
+};
+
 $(window).on("load", function () {
-  renderTweets(data);
+  loadTweets(url);
   $("form").on("submit", function (event) {
     event.preventDefault();
     //console.log( $( this ).serialize() );
-    $.post("http://localhost:8080/tweets", $(this).serialize());
+    //console.log($("#tweet-text").val());
+    let tweetText = $("#tweet-text").val();
+    if (tweetText === "" || tweetText === undefined || tweetText === null) {
+      //alert("Your input is empty!");
+      showErrorMessage("Your input is empty!");
+    } else if (tweetText.length > 140) {
+      showErrorMessage("Your input is more than 140 charactor limit!");
+      //alert("Your input is more than 140 charactor limit!");
+    } else {
+      $.post(url, $(this).serialize());
+      if (!$(".error-message").is(":hidden")) {
+        $(".error-message").slideUp("slow", function () {
+          location.reload();
+        });
+      } else {
+        location.reload();
+      }
+    }
   });
 });
