@@ -1,9 +1,14 @@
+.tweets-container{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 article{
     border: solid #545149;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2em 0;
+    margin: 1em 0;
     font-weight: 400;
 }
 
